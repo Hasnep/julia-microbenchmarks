@@ -1,0 +1,8 @@
+require "./iteration_pi_sum"
+require "./matrix_multiply"
+require "./matrix_statistics"
+require "./parse_integers"
+require "./print_to_file"
+require "./recursion_fibonacci"
+require "./recursion_quicksort"
+require "./userfunc_mandelbrot"
