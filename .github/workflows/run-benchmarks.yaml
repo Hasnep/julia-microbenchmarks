@@ -15,16 +15,17 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
       - name: Build docker image
-        run: docker build --tag ${{ matrix.language }} .
+        run: docker build --tag=${{ matrix.language }} ${{ matrix.language }}
       - name: Run benchmarks
         run: |
+          mkdir -p results/${{ matrix.language }}
           docker run \
-          --workdir /github/workspace \
+          --workdir=/github/workspace \
           --rm \
-          --volume (pwd)"/../results/${{ matrix.language }}":/results \
+          --volume=$PWD/results/${{ matrix.language }}:/results \
           ${{ matrix.language }}
       - name: Upload benchmark results
         uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.language }}-benchmark-results
-          path: output/test/code-coverage.html
+          path: results/${{ matrix.language }}
