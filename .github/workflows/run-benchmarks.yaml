@@ -8,8 +8,9 @@ jobs:
     strategy:
       matrix:
         language:
-          - julia
           - crystal
+          - julia
+          - nim
     runs-on: ubuntu-22.04
     steps:
       - name: Check out code
