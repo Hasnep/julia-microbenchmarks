@@ -8,4 +8,5 @@ bin           = @["run_benchmarks"]
 binDir        = "dist"
 
 # Dependencies
-requires "nim >= 1.6.6"
+requires "nim == 1.6.6"
+requires "neo == 0.3.2"
