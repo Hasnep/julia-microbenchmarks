@@ -21,8 +21,6 @@ jobs:
         run: |
           mkdir -p results/${{ matrix.language }}
           docker run \
-          --workdir=/github/workspace \
-          --rm \
           --volume=$PWD/results/${{ matrix.language }}:/results \
           ${{ matrix.language }}
       - name: Upload benchmark results
