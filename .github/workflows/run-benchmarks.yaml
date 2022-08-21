@@ -11,6 +11,7 @@ jobs:
           - crystal
           - julia
           - nim
+          - python
     runs-on: ubuntu-22.04
     steps:
       - name: Check out code
