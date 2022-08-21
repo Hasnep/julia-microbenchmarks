@@ -2,7 +2,7 @@ from micro_benchmarks.utils import benchmark, write_benchmark_result
 
 
 def iteration_pi_sum(n: int) -> float:
-    return sum([1.0 / (k * k) for k in range(1,n+1)])
+    return sum([1.0 / (k * k) for k in range(1, n + 1)])
 
 
 # Test output
