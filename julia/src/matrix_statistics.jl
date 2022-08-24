@@ -1,47 +1,29 @@
-# using BenchmarkTools
-# using Test
+using BenchmarkTools
+using Test
+using Statistics: std, mean
+using LinearAlgebra: tr
 
-# include("utils.jl")
+include("utils.jl")
 
-# function matrix_statistics(t)
-#   n = 5
-#   v = zeros(t, t)
-#   w = zeros(t, t)
-  
-# end
+function matrix_statistics(t, n)
+    v, w = zeros(t), zeros(t)
+    for i in 1:t
+        a = randn(n, n)
+        b = randn(n, n)
+        c = randn(n, n)
+        d = randn(n, n)
+        P = [a b c d]
+        Q = [a b; c d]
+        v[i] = tr((P' * P)^4)
+        w[i] = tr((Q' * Q)^4)
+    end
+    return std(v) / mean(v), std(w) / mean(w)
+end
 
-# def randmatstat(t):
-#     n = 5
-#     v = zeros(t)
-#     w = zeros(t)
-#     for i in range(t):
-#         a = randn(n, n)
-#         b = randn(n, n)
-#         c = randn(n, n)
-#         d = randn(n, n)
-#         P = concatenate((a, b, c, d), axis=1)
-#         Q = concatenate((concatenate((a, b), axis=1), concatenate((c, d), axis=1)), axis=0)
-#         v[i] = trace(matrix_power(dot(P.T,P), 4))
-#         w[i] = trace(matrix_power(dot(Q.T,Q), 4))
-#     return (std(v)/mean(v), std(w)/mean(w))
+# Test output
+s1, s2 = matrix_statistics(1000, 5)
+@test 0.5 < s1 < 1.0
+@test 0.5 < s2 < 1.0
 
-# randmatstat = function(t) {
-#     n = 5
-#     v = matrix(0, nrow=t)
-#     w = matrix(0, nrow=t)
-#     for (i in 1:t) {
-#         a = matrix(rnorm(n*n), ncol=n, nrow=n)
-#         b = matrix(rnorm(n*n), ncol=n, nrow=n)
-#         c = matrix(rnorm(n*n), ncol=n, nrow=n)
-#         d = matrix(rnorm(n*n), ncol=n, nrow=n)
-#         P = cbind(a,b,c,d)
-#         Q = rbind(cbind(a,b),cbind(c,d))
-#         v[i] = sum(diag((t(P)%*%P)^4))
-#         w[i] = sum(diag((t(Q)%*%Q)^4))
-#     }
-#     s1 = apply(v,2,sd)/mean(v)
-#     s2 = apply(w,2,sd)/mean(w)
-#     return(c(s1,s2))
-# }
-
-# timeit("matrix_statistics", randmatstat, 1000)
+# Run benchmark
+write_benchmark_result("matrix_statistics", @benchmark matrix_statistics(1000, 5))
