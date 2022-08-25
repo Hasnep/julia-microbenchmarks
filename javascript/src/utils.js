@@ -1,0 +1,24 @@
+import { writeFileSync } from "node:fs";
+
+export const benchmark = (f, args, n_trials, n_warmups) => {
+  let times = [];
+  for (let i = 0; i < n_trials + n_warmups; i++) {
+    let t1 = new Date().getTime();
+    f(...args);
+    let t2 = new Date().getTime();
+    if (i >= n_warmups) {
+      times.push(t2 - t1);
+    }
+  }
+  return times;
+};
+
+export const get_mean_time_microseconds = (times) =>
+  1_000_000 * (times.reduce((a, b) => a + b, 0) / times.length);
+
+export const write_benchmark_result = (benchmark_name, times) => {
+  writeFileSync(
+    `/results/${benchmark_name}`,
+    get_mean_time_microseconds(times).toString()
+  );
+};
