@@ -1,0 +1,11 @@
+c
+crystal
+go
+javascript
+julia
+lua
+nim
+octave
+python
+r
+zig
