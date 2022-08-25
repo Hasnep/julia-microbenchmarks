@@ -17,8 +17,8 @@ end
 
 function plot_benchmarks(df)
     @chain df begin
-        data(_) * mapping(:language, :time_normalised => log10, color = :benchmark)
-        draw(axis = (width = 225, height = 225))
+        data(_) * mapping(:language, :time_normalised, color = :benchmark)
+        draw(axis = (width = 225, height = 225, yscale = log10))
     end
 end
 
