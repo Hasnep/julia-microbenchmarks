@@ -1,9 +1,5 @@
 import { strict as assert } from "node:assert";
-import {
-  benchmark,
-  
-  write_benchmark_result,
-} from "./utils.js";
+import { benchmark, write_benchmark_result } from "./utils.js";
 
 const iteration_pi_sum = (n) => {
   let sum = 0.0;
