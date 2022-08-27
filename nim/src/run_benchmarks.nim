@@ -1,0 +1,8 @@
+include iteration_pi_sum
+include matrix_multiply
+include userfunc_mandelbrot
+include matrix_statistics
+include parse_integers
+include print_to_file
+include recursion_fibonacci
+include recursion_quicksort
