@@ -10,7 +10,10 @@ def read_language_list(languages_file: Path) -> List[str]:
 
 
 def generate_service(language: str):
-    return {"build": language, "volumes": [f"$PWD/results/{language}:/results"]}
+    return {
+        "build": f"benchmarks/{language}",
+        "volumes": [f"$PWD/../results/{language}:/results"],
+    }
 
 
 def generate_docker_compose(languages: List[str]) -> Dict[str, Any]:
