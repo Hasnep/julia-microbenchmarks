@@ -15,6 +15,9 @@ repos:
         name: Check scripts with a shebang are executable
       - id: check-added-large-files
         name: Don't allow adding large files
+      - id: no-commit-to-branch
+        name: Prevent committing to main
+        args: [--branch, main]
 
   # Python
   - repo: https://github.com/pre-commit/pre-commit-hooks
