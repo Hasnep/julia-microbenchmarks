@@ -1,7 +1,11 @@
 name: Run benchmarks
 
 on:
-  - push
+  push:
+    branches:
+      - main
+  pull_request:
+      
 
 jobs:
   run-benchmarks:
