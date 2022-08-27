@@ -1,6 +1,5 @@
-from micro_benchmarks.utils import benchmark, write_benchmark_result
-
 import numpy as np
+from micro_benchmarks.utils import benchmark, write_benchmark_result
 
 
 def matrix_multiply(n: int):

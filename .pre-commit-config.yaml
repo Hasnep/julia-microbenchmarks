@@ -1,0 +1,70 @@
+repos:
+  # General checks
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.2.0
+    hooks:
+      - id: end-of-file-fixer
+        name: Check files end with a newline character
+      - id: trailing-whitespace
+        name: Remove trailing whitespace
+      - id: check-merge-conflict
+        name: Check for merge conflicts
+      - id: check-executables-have-shebangs
+        name: Check executable files have a shebang
+      - id: check-shebang-scripts-are-executable
+        name: Check scripts with a shebang are executable
+      - id: check-added-large-files
+        name: Don't allow adding large files
+
+  # Python
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.2.0
+    hooks:
+      - id: check-ast
+        name: Validate Python
+  - repo: https://github.com/PyCQA/isort
+    rev: 5.10.1
+    hooks:
+      - id: isort
+        name: Sort Python imports
+        args: [--profile, black]
+  - repo: https://github.com/psf/black
+    rev: 22.3.0
+    hooks:
+      - id: black
+        name: Check Python formatting
+  - repo: https://github.com/pycqa/flake8
+    rev: 4.0.1
+    hooks:
+      - id: flake8
+        name: Lint Python code
+        args: [--ignore, "E501,F401"]
+
+  # YAML
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.2.0
+    hooks:
+      - id: check-yaml
+        name: Validate YAML files
+
+  # JSON
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.2.0
+    hooks:
+      - id: check-json
+        name: Validate JSON files
+
+  # TOML
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.2.0
+    hooks:
+      - id: check-toml
+        name: Validate TOML files
+
+  # Docker
+  - repo: https://github.com/pryorda/dockerfilelint-precommit-hooks
+    rev: v0.1.0
+    hooks:
+      - id: dockerfilelint
+        name: Lint Dockerfiles
+        files: ".*\\.dockerfile"
