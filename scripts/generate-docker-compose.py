@@ -1,7 +1,7 @@
+import argparse
 import json
 from pathlib import Path
-from typing import List, Any, Dict, Tuple
-import argparse
+from typing import Any, Dict, List, Tuple
 
 
 def read_language_list(languages_file: Path) -> List[str]:
