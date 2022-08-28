@@ -1,8 +1,0 @@
-crystal
-javascript
-julia
-nim
-octave
-python
-r
-zig
