@@ -21,7 +21,7 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
       - name: Build docker image
-        run: docker build --tag=${{ matrix.language }} ${{ matrix.language }}
+        run: docker build --tag=${{ matrix.language }} benchmarks/${{ matrix.language }}
       - name: Run benchmarks
         run: |
           mkdir -p results/${{ matrix.language }}
