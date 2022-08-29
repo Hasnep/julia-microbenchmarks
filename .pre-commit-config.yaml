@@ -71,3 +71,15 @@ repos:
       - id: dockerfilelint
         name: Lint Dockerfiles
         files: ".*\\.dockerfile"
+
+  # Javascript
+  - repo: https://github.com/pre-commit/mirrors-eslint
+    rev: v8.23.0
+    hooks:
+      - id: eslint
+        name: Lint Javascript
+  - repo: https://github.com/pre-commit/mirrors-prettier
+    rev: v3.0.0-alpha.0
+    hooks:
+      - id: prettier
+        name: Format Javascript
