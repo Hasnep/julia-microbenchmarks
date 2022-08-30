@@ -29,10 +29,7 @@ jobs:
       - name: Build docker image
         run: docker build --tag=${{ matrix.language }} benchmarks/${{ matrix.language }}
       - name: Run benchmarks
-        run: |
-          docker run \
-          --volume=$PWD/results/${{ matrix.language }}:/results \
-          ${{ matrix.language }}
+        run: docker run --volume=$PWD/results/${{ matrix.language }}:/results ${{ matrix.language }}
       - name: Upload benchmark results
         uses: actions/upload-artifact@v3
         with:
