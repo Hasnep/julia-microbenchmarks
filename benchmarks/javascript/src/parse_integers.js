@@ -6,13 +6,13 @@ const generate_random_uint32 = () =>
   Math.floor(two_to_the_power_of_thirty_two_minus_one * Math.random());
 
 const parse_int = (n) => {
-  s = n.toString(16);
+  let s = n.toString(16);
   return parseInt(s, 16);
 };
 
 const parse_integers = (t) => {
   for (let i = 0; i < t; i++) {
-    n = generate_random_uint32();
+    let n = generate_random_uint32();
     parse_int(n);
   }
 };

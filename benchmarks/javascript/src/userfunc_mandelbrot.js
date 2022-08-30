@@ -1,5 +1,5 @@
 import { strict as assert } from "node:assert";
-import { benchmark, write_benchmark_result, range, sum } from "./utils.js";
+import { benchmark, write_benchmark_result, sum_array } from "./utils.js";
 
 class Complex {
   constructor(re, im) {
@@ -20,7 +20,7 @@ const complex_multiply = (z, w) =>
 const mandel = (z) => {
   let maxiter = 80;
   let c = z;
-  for (n = 0; n < maxiter; n++) {
+  for (let n = 0; n < maxiter; n++) {
     if (abs2(z) > 4) {
       return n;
     }
@@ -43,8 +43,8 @@ const userfunc_mandelbrot = () => {
 };
 
 // Test output
-assert(sum(userfunc_mandelbrot()) == 6765);
+assert(sum_array(userfunc_mandelbrot()) == 6765);
 
 // Run benchmark
-let times = benchmark(userfunc_mandelbrot, [], 1000, 100);
+let times = benchmark(userfunc_mandelbrot, [], 100, 10);
 write_benchmark_result("userfunc_mandelbrot", times);

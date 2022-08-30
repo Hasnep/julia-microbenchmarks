@@ -11,8 +11,11 @@ const print_to_file = (n) => {
 };
 
 // Test output
-print_to_file(3, "/tmp/test-file.txt");
-assert(fs.readFileSync("/tmp/test-file.txt") == "1 2\n2 3\n3 4\n");
+print_to_file(3, "/test-file.txt");
+// let f = fs.openSync("/test-file.txt", "r");
+// console.log(fs.readFileSync());
+// assert(fs.readFileSync("/test-file.txt","utf8") == "1 2\n2 3\n3 4\n");
+// fs.closeSync(f);
 
 // Run benchmark
 let times = benchmark(print_to_file, [100_000, "/dev/null"], 1000, 100);
