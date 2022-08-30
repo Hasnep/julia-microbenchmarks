@@ -6,7 +6,7 @@ from typing import Any, Dict, List
 def generate_service(language: str):
     return {
         "build": f"benchmarks/{language}",
-        "volumes": [f"$PWD/../results/{language}:/results"],
+        "volumes": [f"$PWD/results/{language}:/results"],
     }
 
 
