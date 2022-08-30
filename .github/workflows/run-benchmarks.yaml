@@ -35,3 +35,36 @@ jobs:
         with:
           name: ${{ matrix.language }}
           path: ~/results/${{ matrix.language }}
+  analyse-benchmark-results:
+    needs: [run-benchmarks]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download benchmark results
+        uses: actions/download-artifact@v3
+        with:
+          path: ~/results
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Install Julia
+        uses: julia-actions/setup-julia@v1
+        with:
+          version: 1.8.0
+      - name: Cache Julia artifacts
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.julia/artifacts
+            ~/.julia/packages
+            ~/.julia/registries
+          key: ${{ runner.os }}-${{ hashFiles('./analysis/Project.toml', 'analysis/Manifest.toml') }}
+      - name: Install Julia dependencies
+        run: julia --project=. -e 'import Pkg; Pkg.instantiate()'
+        working-directory: analysis
+      - name: Run analysis
+        run: julia --project=. src/analysis.jl ~/results ~/output
+        working-directory: analysis
+      - name: Upload benchmark analysis
+        uses: actions/upload-artifact@v3
+        with:
+          name: analysis-output
+          path: ~/output/benchmarks.png
