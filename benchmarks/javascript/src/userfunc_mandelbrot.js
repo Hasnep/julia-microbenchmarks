@@ -1,5 +1,5 @@
 import { strict as assert } from "node:assert";
-import { benchmark, write_benchmark_result, sum_array } from "./utils.js";
+import { benchmark, write_benchmark_result, sum } from "./utils.js";
 
 class Complex {
   constructor(re, im) {
@@ -43,7 +43,7 @@ const userfunc_mandelbrot = () => {
 };
 
 // Test output
-assert(sum_array(userfunc_mandelbrot()) == 6765);
+assert(sum(userfunc_mandelbrot()) == 6765);
 
 // Run benchmark
 let times = benchmark(userfunc_mandelbrot, [], 100, 10);
