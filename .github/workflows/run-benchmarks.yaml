@@ -34,4 +34,4 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: ${{ matrix.language }}-benchmark-results
-          path: results/${{ matrix.language }}
+          path: ./results/${{ matrix.language }}
