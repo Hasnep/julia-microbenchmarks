@@ -23,3 +23,5 @@ export const write_benchmark_result = (benchmark_name, times) => {
 };
 
 export const range = (n) => Array.from(Array(n).keys());
+
+export const sum = (arr) => arr.reduce((x, a) => x + a, 0);
