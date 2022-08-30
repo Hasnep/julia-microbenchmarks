@@ -21,5 +21,7 @@ def get_mean_time_microseconds(times: List[float]) -> float:
 
 
 def write_benchmark_result(benchmark_name: str, times: List[float]) -> None:
+    mean_time_microseconds = str(get_mean_time_microseconds(times))
+    print(f"{benchmark_name}: {mean_time_microseconds}")
     with open(f"/results/{benchmark_name}", "w") as f:
-        f.write(str(get_mean_time_microseconds(times)))
+        f.write(mean_time_microseconds)
