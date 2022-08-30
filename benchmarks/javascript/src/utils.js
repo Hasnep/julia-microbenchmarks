@@ -17,8 +17,7 @@ export const get_mean_time_microseconds = (times) =>
   1_000_000 * (times.reduce((a, b) => a + b, 0) / times.length);
 
 export const write_benchmark_result = (benchmark_name, times) => {
-  writeFileSync(
-    `/results/${benchmark_name}`,
-    get_mean_time_microseconds(times).toString(),
-  );
+  let mean_time_microseconds = get_mean_time_microseconds(times).toString();
+  console.log(`${benchmark_name}: ${mean_time_microseconds}`);
+  writeFileSync(`/results/${benchmark_name}`, mean_time_microseconds);
 };
