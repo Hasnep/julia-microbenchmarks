@@ -27,11 +27,11 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
       - name: Build docker image
-        run: docker build --tag=${{ matrix.language }} benchmarks/${{ matrix.language }}
+        run: docker build --tag=${{ matrix.language }} ./benchmarks/${{ matrix.language }}
       - name: Run benchmarks
-        run: docker run --volume=$PWD/results/${{ matrix.language }}:/results ${{ matrix.language }}
+        run: docker run --volume=$HOME/results/${{ matrix.language }}:/results ${{ matrix.language }}
       - name: Upload benchmark results
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ matrix.language }}-benchmark-results
-          path: ./results/${{ matrix.language }}
+          name: ${{ matrix.language }}
+          path: ~/results/${{ matrix.language }}
