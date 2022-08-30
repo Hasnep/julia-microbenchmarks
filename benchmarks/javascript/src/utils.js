@@ -21,3 +21,5 @@ export const write_benchmark_result = (benchmark_name, times) => {
   console.log(`${benchmark_name}: ${mean_time_microseconds}`);
   writeFileSync(`/results/${benchmark_name}`, mean_time_microseconds);
 };
+
+export const range = (n) => Array.from(Array(n).keys());
