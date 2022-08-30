@@ -27,11 +27,44 @@ jobs:
       - name: Check out code
         uses: actions/checkout@v2
       - name: Build docker image
-        run: docker build --tag=${{ matrix.language }} benchmarks/${{ matrix.language }}
+        run: docker build --tag=${{ matrix.language }} ./benchmarks/${{ matrix.language }}
       - name: Run benchmarks
-        run: docker run --volume=$PWD/results/${{ matrix.language }}:/results ${{ matrix.language }}
+        run: docker run --volume=$HOME/results/${{ matrix.language }}:/results ${{ matrix.language }}
       - name: Upload benchmark results
         uses: actions/upload-artifact@v3
         with:
-          name: ${{ matrix.language }}-benchmark-results
-          path: ./results/${{ matrix.language }}
+          name: ${{ matrix.language }}
+          path: ~/results/${{ matrix.language }}
+  analyse-benchmark-results:
+    needs: [run-benchmarks]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download benchmark results
+        uses: actions/download-artifact@v3
+        with:
+          path: ~/results
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Install Julia
+        uses: julia-actions/setup-julia@v1
+        with:
+          version: 1.8.0
+      - name: Cache Julia artifacts
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.julia/artifacts
+            ~/.julia/packages
+            ~/.julia/registries
+          key: ${{ runner.os }}-${{ hashFiles('./analysis/Project.toml', 'analysis/Manifest.toml') }}
+      - name: Install Julia dependencies
+        run: julia --project=. -e 'import Pkg; Pkg.instantiate()'
+        working-directory: analysis
+      - name: Run analysis
+        run: julia --project=. src/analysis.jl ~/results ~/output
+        working-directory: analysis
+      - name: Upload benchmark analysis
+        uses: actions/upload-artifact@v3
+        with:
+          name: analysis-output
+          path: ~/output/benchmarks.png
