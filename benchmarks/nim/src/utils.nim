@@ -2,15 +2,15 @@ import times
 import os
 import strutils
 
-func benchmark(benchmark_name: string, n_trials: int, n_warmups: int, body) =
-    benchmark_times: seq[float] = []
+proc benchmark(benchmark_name: string, n_trials: int, n_warmups: int, body) =
+    var benchmark_times: seq[float] = []
     for i in countup(0, n_trials+n_warmups):
         var t0 = epochTime()
         body
         var t1 = epochTime()
         if i >= n_warmups:
             benchmark_times.add(t1 - t0)
-    benchmark_times
+
 
 
 
