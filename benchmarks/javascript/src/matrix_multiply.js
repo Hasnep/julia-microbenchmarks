@@ -28,7 +28,7 @@ const matmul = (A, B, m, l, n) => {
 
   for (let i = 0; i < m; i++) {
     for (let j = 0; j < n; j++) {
-      total = 0.0;
+      let total = 0.0;
       for (let k = 0; k < l; k++) {
         total += A[i * l + k] * B[j * l + k];
       }
