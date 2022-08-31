@@ -1,0 +1,8 @@
+include("iteration_pi_sum.jl")
+include("matrix_multiply.jl")
+include("matrix_statistics.jl")
+include("parse_integers.jl")
+include("print_to_file.jl")
+include("recursion_fibonacci.jl")
+include("recursion_quicksort.jl")
+include("userfunc_mandelbrot.jl")
