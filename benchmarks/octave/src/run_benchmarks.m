@@ -6,4 +6,4 @@
 % recursion_fibonacci;
 % recursion_quicksort;
 % userfunc_mandelbrot;
-perf
+perf;

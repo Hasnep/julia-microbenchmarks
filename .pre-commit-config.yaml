@@ -83,3 +83,5 @@ repos:
     hooks:
       - id: prettier
         name: Format Javascript
+# Octave
+# pipx run --spec miss_hit mh_style --fix **/*.m
