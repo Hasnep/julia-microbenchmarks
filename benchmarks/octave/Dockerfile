@@ -1,6 +1,5 @@
 FROM docker.io/gnuoctave/octave:6.3.0
 
+COPY src .
 
-COPY src /src/
-
-CMD [ "octave-cli", "/src/run_benchmarks.m" ]
+CMD [ "start.sh", "octave", "run_benchmarks.m" ]

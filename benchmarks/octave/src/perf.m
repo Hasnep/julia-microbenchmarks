@@ -74,6 +74,8 @@ function timeit(name, func, varargin)
 
     times = sort(times);
     fprintf ('%s,%s,%.8f\n', lang, name, times(1)*1000);
+
+    write_benchmark_result(name,times(1)*1000);
 end
 
 %% recursive fib %%
