@@ -7,9 +7,9 @@ function perf()
 
     warning off;
 
-    f = fib(20);
-    assert(f == 6765);
-    timeit('recursion_fibonacci', @fib, 20);
+    % f = fib(20);
+    % assert(f == 6765);
+    % timeit('recursion_fibonacci', @fib, 20);
 
     timeit('parse_integers', @parseintperf, 1000);
 
@@ -52,11 +52,6 @@ end
 %%  Functions declarations  %%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-function assert(bool)
-    if ~bool
-        error('Assertion failed');
-    end
-end
 
 function timeit(name, func, varargin)
     lang = 'matlab';

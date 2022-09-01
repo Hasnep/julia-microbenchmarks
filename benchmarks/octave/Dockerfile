@@ -1,5 +1,8 @@
-FROM docker.io/gnuoctave/octave:6.3.0
+FROM docker.io/matpower/octave:7.2.0
 
+WORKDIR /
 COPY src .
 
-CMD [ "start.sh", "octave", "run_benchmarks.m" ]
+USER root
+ENTRYPOINT [ "octave" ]
+CMD [ "run_benchmarks.m" ]
