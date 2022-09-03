@@ -43,12 +43,11 @@ const rand = (n) => {
   return v;
 };
 
-const qsort_kernel = (a, lo, hi) => {
-  var i, j, pivot, t;
-  i = lo;
-  j = hi;
+const quicksort_kernel = (a, lo, hi) => {
+  let i = lo;
+  let j = hi;
   while (i < hi) {
-    pivot = a[Math.floor((lo + hi) / 2)];
+    let pivot = a[Math.floor((lo + hi) / 2)];
     while (i <= j) {
       while (a[i] < pivot) {
         i = i + 1;
@@ -65,7 +64,7 @@ const qsort_kernel = (a, lo, hi) => {
       }
     }
     if (lo < j) {
-      qsort_kernel(a, lo, j);
+      quicksort_kernel(a, lo, j);
     }
     lo = i;
     j = hi;
@@ -74,6 +73,6 @@ const qsort_kernel = (a, lo, hi) => {
 
 function sortperf(n) {
   var v = rand(n);
-  qsort_kernel(v, 0, n);
+  quicksort_kernel(v, 0, n);
   return v;
 }
