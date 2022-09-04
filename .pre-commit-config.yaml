@@ -83,3 +83,12 @@ repos:
     hooks:
       - id: prettier
         name: Format Javascript
+
+  # Nim
+  - repo: local
+    hooks:
+      - id: nimpretty
+        name: Format Nim
+        entry: nimpretty
+        language: system
+        types: [nim]
