@@ -34,7 +34,7 @@ function main()
     end
 
     p = plot_benchmarks(df)
-    save(joinpath(output_directory, "benchmarks.png"), p)
+    save(joinpath(output_directory, "benchmarks.svg"), p)
 end
 
 main()
