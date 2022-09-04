@@ -37,6 +37,8 @@ jobs:
           name: ${{ matrix.language }}
           path: ~/results/${{ matrix.language }}
   analyse-benchmark-results:
+    # Only run on push to main
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs:
       - run-benchmarks
     runs-on: ubuntu-latest
