@@ -69,4 +69,28 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: analysis-output
-          path: ~/output/benchmarks.png
+          path: ~/output/benchmarks.svg
+  publish-results-to-github-pages:
+    needs:
+      - analyse-benchmark-results
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Download analysis output
+        uses: actions/download-artifact@v3
+        with:
+          name: analysis-output
+          path: ./pages/images
+      - name: Setup GitHub Pages
+        uses: actions/configure-pages@v2
+      - name: Upload benchmark results page
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: ./pages
+      - name: Deploy to GitHub Pages
+        uses: actions/deploy-pages@v1
+        id: deploy
