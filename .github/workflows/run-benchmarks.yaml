@@ -27,6 +27,8 @@ jobs:
     steps:
       - name: Check out code
         uses: actions/checkout@v2
+      - name: Cache Docker layers
+        uses: satackey/action-docker-layer-caching@v0.0.11
       - name: Build docker image
         run: docker build --tag=${{ matrix.language }} ./benchmarks/${{ matrix.language }}
       - name: Run benchmarks
