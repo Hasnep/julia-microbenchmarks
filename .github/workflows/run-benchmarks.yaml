@@ -18,7 +18,8 @@ jobs:
         id: get-languages
         run: echo "::set-output name=languages::[\"$(ls ./benchmarks | tr "\n" "\t" | sed 's/\t$//' | sed -E 's/\t/","/g')\"]"
   run-benchmarks:
-    needs: [get-languages]
+    needs:
+      - get-languages
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -36,7 +37,8 @@ jobs:
           name: ${{ matrix.language }}
           path: ~/results/${{ matrix.language }}
   analyse-benchmark-results:
-    needs: [run-benchmarks]
+    needs:
+      - run-benchmarks
     runs-on: ubuntu-latest
     steps:
       - name: Download benchmark results
