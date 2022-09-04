@@ -7,18 +7,17 @@ read_benchmark_result(file_path) = open(f -> parse(Float32, String(read(f))), fi
 
 read_benchmark_results(benchmarks_folder) = DataFrame(
     (
-        language=language,
-        benchmark=benchmark_name,
-        time=read_benchmark_result(joinpath(benchmarks_folder, language, benchmark_name)),
+        language = language,
+        benchmark = benchmark_name,
+        time = read_benchmark_result(joinpath(benchmarks_folder, language, benchmark_name)),
     ) for language in readdir(benchmarks_folder) for
     benchmark_name in readdir(joinpath(benchmarks_folder, language))
 )
 
-
 function plot_benchmarks(df)
     @chain df begin
-        data(_) * mapping(:language, :time_normalised, color=:benchmark)
-        draw(axis=(width=225, height=225, yscale=log10))
+        data(_) * mapping(:language, :time_normalised, color = :benchmark)
+        draw(axis = (width = 225, height = 225, yscale = log10))
     end
 end
 
