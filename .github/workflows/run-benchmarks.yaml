@@ -52,7 +52,7 @@ jobs:
             ~/.julia/registries
           key: ${{ runner.os }}-${{ hashFiles('./analysis/Project.toml', 'analysis/Manifest.toml') }}
       - name: Install Juliaup
-        run: curl -fsSL https://install.julialang.org | sh
+        run: curl -fsSL https://install.julialang.org | sh -s -- --yes
       - name: Install Julia
         run: juliaup add release
       - name: Install system image
