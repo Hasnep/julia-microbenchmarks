@@ -43,16 +43,8 @@ jobs:
       - run-benchmarks
     runs-on: ubuntu-latest
     steps:
-      - name: Download benchmark results
-        uses: actions/download-artifact@v3
-        with:
-          path: ~/results
       - name: Check out code
         uses: actions/checkout@v2
-      - name: Install Julia
-        uses: julia-actions/setup-julia@v1
-        with:
-          version: 1.8.0
       - name: Cache Julia artifacts
         uses: actions/cache@v3
         with:
@@ -61,9 +53,19 @@ jobs:
             ~/.julia/packages
             ~/.julia/registries
           key: ${{ runner.os }}-${{ hashFiles('./analysis/Project.toml', 'analysis/Manifest.toml') }}
+      - name: Install Juliaup
+        run: curl -fsSL https://install.julialang.org | sh
+      - name: Install Julia
+        run: juliaup add release
+      - name: Install system image
+        run: julia -e 'import Pkg; Pkg.add(url=""); import CuratedSystemImages; CuratedSystemImages.install("AlgebraOfGraphics")'
       - name: Install Julia dependencies
         run: julia --project=. -e 'import Pkg; Pkg.instantiate()'
         working-directory: analysis
+      - name: Download benchmark results
+        uses: actions/download-artifact@v3
+        with:
+          path: ~/results
       - name: Run analysis
         run: julia --project=. src/analysis.jl ~/results ~/output
         working-directory: analysis
