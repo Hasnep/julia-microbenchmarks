@@ -1,8 +1,6 @@
 require(compiler)
 
-assert = function(bool) {
-    if (!bool) stop('Assertion failed')
-}
+
 
 timeit = function(name, f, ..., times=5) {
     tmin = Inf
@@ -24,7 +22,7 @@ fib = function(n) {
     }
 }
 
-assert(fib(20) == 6765)
+stopifnot(fib(20) == 6765)
 timeit("recursion_fibonacci", fib, 20)
 
 ## parse_int ##
@@ -35,7 +33,7 @@ parseintperf = function(t) {
         n = floor(runif(1, min=0, max=2^31-1))
         s = sprintf("0x%x", n)
         m = as.numeric(s)
-        assert(m == n)
+        stopifnot(m == n)
     }
 }
 
@@ -85,7 +83,7 @@ sortperf = function(n) {
     return(qsort(v))
 }
 
-assert(!is.unsorted(sortperf(5000)))
+stopifnot(!is.unsorted(sortperf(5000)))
 timeit('recursion_quicksort', sortperf, 5000)
 
 ## mandel ##
@@ -117,7 +115,7 @@ mandelperf = function() {
     return(M)
 }
 
-assert(sum(mandelperf()) == 14791)
+stopifnot(sum(mandelperf()) == 14791)
 timeit("userfunc_mandelbrot", mandelperf)
 
 ## pi_sum ##
@@ -133,7 +131,7 @@ pisum = function() {
     return(t)
 }
 
-assert(abs(pisum()-1.644834071848065) < 1e-12);
+stopifnot(abs(pisum()-1.644834071848065) < 1e-12);
 timeit("iteration_pi_sum", pisum, times=1)
 
 ## pi_sum_vec ##
