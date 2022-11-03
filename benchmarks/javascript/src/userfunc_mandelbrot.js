@@ -1,5 +1,5 @@
 import { strict as assert } from "node:assert";
-import { benchmark, write_benchmark_result, sum } from "./utils.js";
+import { benchmark, writeBenchmarkResult, sum } from "./utils.js";
 
 class Complex {
   constructor(re, im) {
@@ -12,9 +12,9 @@ const abs2 = (z) => {
   return z.re * z.re + z.im * z.im;
 };
 
-const complex_add = (z, w) => new Complex(z.re + w.re, z.im + w.im);
+const complexAdd = (z, w) => new Complex(z.re + w.re, z.im + w.im);
 
-const complex_multiply = (z, w) =>
+const complexMultiply = (z, w) =>
   new Complex(z.re * w.re - z.im * w.im, z.re * w.im + z.im * w.re);
 
 const mandel = (z) => {
@@ -24,12 +24,12 @@ const mandel = (z) => {
     if (abs2(z) > 4) {
       return n;
     }
-    z = complex_add(complex_multiply(z, z), c);
+    z = complexAdd(complexMultiply(z, z), c);
   }
   return maxiter;
 };
 
-const userfunc_mandelbrot = () => {
+const userfuncMandelbrot = () => {
   let a = new Array(26 * 21);
   for (let r = 0; r < 26; r++) {
     let re = -2.0 + r * 0.1;
@@ -43,8 +43,8 @@ const userfunc_mandelbrot = () => {
 };
 
 // Test output
-assert(sum(userfunc_mandelbrot()) == 6765);
+assert(sum(userfuncMandelbrot()) == 6765);
 
 // Run benchmark
-let times = benchmark(userfunc_mandelbrot, [], 100, 10);
-write_benchmark_result("userfunc_mandelbrot", times);
+let times = benchmark(userfuncMandelbrot, [], 100, 10);
+writeBenchmarkResult("userfunc_mandelbrot", times);

@@ -1,5 +1,5 @@
 import { strict as assert } from "node:assert";
-import { benchmark, write_benchmark_result } from "./utils.js";
+import { benchmark, writeBenchmarkResult } from "./utils.js";
 
 // function qsort!(a, lo, hi)
 //     i, j = lo, hi
@@ -33,7 +33,7 @@ assert(output === output.sort());
 
 // Run benchmark
 let times = benchmark(recursion_quicksort, [5000], 1000, 100);
-write_benchmark_result("recursion_quicksort", times);
+writeBenchmarkResult("recursion_quicksort", times);
 
 const rand = (n) => {
   let v = new Array(n);
@@ -43,7 +43,7 @@ const rand = (n) => {
   return v;
 };
 
-const quicksort_kernel = (a, lo, hi) => {
+const quicksortKernel = (a, lo, hi) => {
   let i = lo;
   let j = hi;
   while (i < hi) {
@@ -64,7 +64,7 @@ const quicksort_kernel = (a, lo, hi) => {
       }
     }
     if (lo < j) {
-      quicksort_kernel(a, lo, j);
+      quicksortKernel(a, lo, j);
     }
     lo = i;
     j = hi;
@@ -73,6 +73,6 @@ const quicksort_kernel = (a, lo, hi) => {
 
 function sortperf(n) {
   var v = rand(n);
-  quicksort_kernel(v, 0, n);
+  quicksortKernel(v, 0, n);
   return v;
 }
