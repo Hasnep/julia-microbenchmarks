@@ -1,24 +1,23 @@
-import { strict as assert } from "node:assert";
-import { benchmark, write_benchmark_result } from "./utils.js";
-import { transposeMatrix, multiplyMatrices } from "./matrix_utils";
+// import { strict as assert } from "node:assert";
+// import { benchmark, writeBenchmarkResult } from "./utils.js";
+// import { matrix, multiply } from "mathjs";
 
-const generateRandomUniformArray = (arrayLength) => {
-  let v = new Float64Array(arrayLength);
-  for (let i = 0; i < arrayLength; i++) {
-    v[i] = Math.random();
-  }
-  return v;
-};
+// const generateRandomUniformMatrix = (m, n) =>
+//   matrix(
+//     Array.from({ length: m }, () =>
+//       Array.from({ length: n }, () => Math.random())
+//     )
+//   );
 
-const matrixMultiply = (n) => {
-  let A = generateRandomUniformArray(n * n);
-  let B = generateRandomUniformArray(n * n);
-  return multiplyMatrices(A, B, n, n, n);
-};
+// const matrixMultiply = (n) => {
+//   let a = generateRandomUniformMatrix(n, n);
+//   let b = generateRandomUniformMatrix(n, n);
+//   return multiply(a, b);
+// };
 
-// Test output
-assert(matrixMultiply(1000)[0] >= 0);
+// // Test output
+// assert(matrixMultiply(1000)[0] >= 0);
 
-// Run benchmark
-let times = benchmark(matrixMultiply, [1000], 1000, 100);
-write_benchmark_result("matrix_multiply", times);
+// // Run benchmark
+// let times = benchmark(matrixMultiply, [1000], 1000, 100);
+// writeBenchmarkResult("matrix_multiply", times);
